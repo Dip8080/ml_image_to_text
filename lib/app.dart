@@ -56,8 +56,8 @@ class _TextRecogState extends State<TextRecog> {
 
     // Object detection and labeling
     final options = ObjectDetectorOptions(
-      mode: DetectionMode.stream,
-      classifyObjects: false,
+      mode: DetectionMode.single, // Use single mode for testing
+      classifyObjects: true, // Enable classification
       multipleObjects: true,
     );
     final objectDetector = ObjectDetector(options: options);
@@ -71,6 +71,8 @@ class _TextRecogState extends State<TextRecog> {
           objectLabels += label.text + ' ';
         }
       }
+    } else {
+      objectLabels = 'No objects detected';
     }
 
     setState(() {
@@ -192,7 +194,7 @@ class _TextRecogState extends State<TextRecog> {
         child: Text(
           recognizedText,
           textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
         ),
       ),
     );
